@@ -1,7 +1,7 @@
 export const WeatherNav = () => {
   return (
     <div className="text-gray-800">
-      <nav className="w-full bg-sky-700 flex justify-between px-16">
+      <nav className="w-full bg-sky-600 flex justify-between px-16">
         <div className="flex-1"></div>
         <h2 className="font-paytone self-center text-4xl tracking-wide">
           What the Weather?
@@ -11,9 +11,9 @@ export const WeatherNav = () => {
             id="city-search"
             placeholder="Search weather by city..."
             type="text"
-            className="p-2 rounded-l-lg"
+            className="p-2 _rounded-l-lg"
           />
-          <button className="bg-sky-400 py-2 px-4 rounded-r-lg hover:bg-sky-500">
+          <button className="bg-sky-400 py-2 px-4 _rounded-r-lg hover:bg-sky-500">
             Search
           </button>
         </form>
