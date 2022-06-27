@@ -23,8 +23,8 @@ $ npm run start
 
 There are two important environmantal variables that need to be set:
 
-| Name        | Description                                       | Default value         |
-| ----------- | ------------------------------------------------- | --------------------- |
-| PORT        | The port number on which the application will run | 3001                  |
-| BACKEND_URL | The url address of the backend app                | http://localhost:3000 |
+| Name                  | Description                                       | Default value         |
+| --------------------- | ------------------------------------------------- | --------------------- |
+| PORT                  | The port number on which the application will run | 3001                  |
+| REACT_APP_BACKEND_URL | The url address of the backend app                | http://localhost:3000 |
 
