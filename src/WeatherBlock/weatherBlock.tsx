@@ -81,7 +81,7 @@ export const WeatherBlock = () => {
 
   return (
     <div className="font-mono text-center text-white">
-      <h3 className="text-4xl text-slate-800 mb-5">Weather for today:</h3>
+      <h3 className="text-4xl text-slate-800 my-5">Weather for today:</h3>
       {error && (
         <div className="bg-sky-600 p-5 py-10 text-2xl font-semibold text-white fade-in">
           {(error === "city not found" && (
@@ -125,9 +125,9 @@ export const WeatherBlock = () => {
         </div>
       )}
       {weather && (
-        <div className="bg-sky-600 p-6 _rounded-lg shadow-lg shadow-slate-600 grid grid-cols-3 gap-3 text-lg cursor-default fade-in">
+        <div className="bg-sky-600 p-6 _rounded-lg shadow-lg shadow-slate-600 grid sm:grid-cols-3 gap-3 text-lg cursor-default fade-in">
           <div className="col-span-1 text-left px-6 border-sky-700 border-r-2 border-opacity-30">
-            <h2 className="text-4xl text-yellow-400 font-semibold mb-7 border-b-2 border-white border-opacity-10">
+            <h2 className="text-3xl sm:text-4xl text-yellow-400 font-semibold mb-7 border-b-2 border-white border-opacity-10">
               {weather.name}
             </h2>
             <p>
@@ -148,14 +148,16 @@ export const WeatherBlock = () => {
               })}
             </p>
             <div>
-              <h3 className="text-5xl">{weather.main.temp.toFixed()}°C</h3>
+              <h3 className="text-4xl sm:text-5xl">
+                {weather.main.temp.toFixed()}°C
+              </h3>
               <p>Feels like: {weather.main.feels_like.toFixed()}°C</p>
             </div>
           </div>
           <div className="col-span-1 px-3">
             <div className="p-2 _rounded-lg bg-white bg-opacity-10 mb-2 h-2/3">
               <img
-                className="mx-auto"
+                className="mx-auto max-h-full"
                 src={`${ICON_URL}${weather.weather[0].icon}@4x.png`}
                 alt=""
               />
@@ -164,7 +166,7 @@ export const WeatherBlock = () => {
               {weather.weather[0].description}
             </p>
           </div>
-          <div className="col-span-1 text-left px-6 border-sky-700 border-l-2 border-opacity-30">
+          <div className="col-span-1 text-left pl-6 border-sky-700 border-l-2 border-opacity-30">
             <div className="ml-3 mt-6 text-xl space-y-3">
               <p title="Sunrise" className="hover:text-yellow-100">
                 <SunriseIcon className="inline mr-4" />

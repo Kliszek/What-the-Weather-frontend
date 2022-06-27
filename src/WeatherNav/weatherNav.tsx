@@ -17,11 +17,11 @@ export const WeatherNav = () => {
 
   return (
     <div className="text-gray-800 shadow-lg shadow-slate-300 z-10 */">
-      <nav className="w-full bg-sky-600 flex justify-between px-16">
-        <div className="flex-1"></div>
+      <nav className="w-full bg-sky-600 pb-2 md:pb-0 flex flex-col md:flex-row justify-between px-16">
+        <div className="xl:flex-1"></div>
         <Link
           to="/"
-          className="font-paytone text-white self-center text-4xl tracking-wide"
+          className="font-paytone text-white self-center text-4xl tracking-wide py-4 text-center"
         >
           <SunIcon
             className="inline mr-4 -translate-y-2"
@@ -29,7 +29,10 @@ export const WeatherNav = () => {
           />
           What the Weather?
         </Link>
-        <form onSubmit={handleSubmit} className="p-3 m-2 flex-1 text-right">
+        <form
+          onSubmit={handleSubmit}
+          className="p-3 flex-1 flex md:justify-end m-auto"
+        >
           <input
             id="city-search"
             placeholder="Search weather by city..."
