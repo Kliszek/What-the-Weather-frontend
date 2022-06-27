@@ -3,9 +3,14 @@ import { ReactComponent as SunsetIcon } from "../svg/sunset.svg";
 import { ReactComponent as HumidityIcon } from "../svg/droplet.svg";
 import { ReactComponent as WindIcon } from "../svg/wind.svg";
 import { ReactComponent as PressureIcon } from "../svg/arrow-up.svg";
+import { ReactComponent as SunIcon } from "../svg/sun-fill.svg";
 import { useEffect, useState } from "react";
 import WeatherService from "../services/weather.service";
 import { WeatherResponse } from "../services/weather-response.interface";
+import "../animations/loading-spinner.css";
+import "../animations/fade-in.css";
+
+const ICON_URL = "http://openweathermap.org/img/wn/";
 
 const getHourAndMinutes = (unixInSeconds: number) =>
   new Date(unixInSeconds * 1000).toLocaleTimeString([], {
@@ -46,6 +51,7 @@ export const WeatherBlock = () => {
     WeatherService.getWeather()
       .then((result) => {
         setWeather(result.data);
+        setIsPending(false);
       })
       .catch((error) => {
         console.log(error);
@@ -55,8 +61,17 @@ export const WeatherBlock = () => {
   return (
     <div className="font-mono text-center text-white">
       <h3 className="text-4xl text-black mb-5">Weather for today:</h3>
+      {isPending && (
+        <div className="spinner mx-auto">
+          <SunIcon />
+          <div />
+          <div />
+          <div />
+          <div />
+        </div>
+      )}
       {weather && (
-        <div className="bg-sky-600 p-6 _rounded-lg shadow-lg shadow-slate-600 grid grid-cols-3 gap-3 text-lg">
+        <div className="bg-sky-600 p-6 _rounded-lg shadow-lg shadow-slate-600 grid grid-cols-3 gap-3 text-lg fade-in">
           <div className="col-span-1 text-left px-6 border-sky-700 border-r-2 border-opacity-30">
             <h2 className="text-4xl font-semibold mb-7">{weather.name}</h2>
             <p>
@@ -85,7 +100,7 @@ export const WeatherBlock = () => {
             <div className="p-2 _rounded-lg bg-white bg-opacity-10 mb-2 h-2/3">
               <img
                 className="mx-auto"
-                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}
+                src={`${ICON_URL}${weather.weather[0].icon}@4x.png`}
                 alt=""
               />
             </div>
