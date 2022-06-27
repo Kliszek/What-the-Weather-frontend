@@ -57,18 +57,22 @@ export const WeatherBlock = () => {
     setError(null);
     setWeather(null);
     console.log("asdasdga");
-    WeatherService.getWeather(cityName)
+    WeatherService.getWeather(cityName, { signal: abortCont.signal })
       .then((result) => {
         setWeather(result.data);
         setIsPending(false);
+        setError(null);
       })
       .catch((error: AxiosError) => {
         console.log(error);
+        if (error.message === "canceled") return;
         setIsPending(false);
         if (error.response?.status === 404) {
-          setError("Specified city was not found!");
+          setError("city not found");
+        } else if (error.response?.status === 429) {
+          setError("too many requests");
         } else {
-          setError(`Error: ${error.message}`);
+          setError(`Error: ${error.response?.statusText || error.message}`);
         }
       });
 
@@ -78,7 +82,39 @@ export const WeatherBlock = () => {
   return (
     <div className="font-mono text-center text-white">
       <h3 className="text-4xl text-black mb-5">Weather for today:</h3>
-      {error && <div className="text-black">{error}</div>}
+      {error && (
+        <div className="bg-sky-600 p-5 py-10 text-2xl font-semibold text-white fade-in">
+          {(error === "city not found" && (
+            <div className="text-left px-7">
+              <h2 className="text-5xl text-yellow-400 mb-4 inline-block border-b-2 border-white border-opacity-10">
+                Oops!
+              </h2>
+              <p className="text-3xl">
+                A city named{" "}
+                <span className="text-3xl text-yellow-400 underline italic">
+                  {cityName}
+                </span>{" "}
+                couldn't be found!
+              </p>
+              <br />
+              <p className="text-xl text-yellow-100">
+                Double check if you spelled it correctly!
+              </p>
+            </div>
+          )) ||
+            (error === "too many requests" && (
+              <div className="text-left px-7">
+                <h2 className="text-5xl text-yellow-400 mb-4 inline-block border-b-2 border-white border-opacity-10">
+                  Oops!
+                </h2>
+                <p className="text-3xl">Too many requests!</p>
+                <br />
+                <p className="text-xl text-yellow-100">Slow down a little...</p>
+              </div>
+            )) ||
+            "another error"}
+        </div>
+      )}
       {isPending && (
         <div className="spinner mx-auto">
           <SunIcon />
@@ -91,7 +127,9 @@ export const WeatherBlock = () => {
       {weather && (
         <div className="bg-sky-600 p-6 _rounded-lg shadow-lg shadow-slate-600 grid grid-cols-3 gap-3 text-lg fade-in">
           <div className="col-span-1 text-left px-6 border-sky-700 border-r-2 border-opacity-30">
-            <h2 className="text-4xl font-semibold mb-7">{weather.name}</h2>
+            <h2 className="text-4xl font-semibold mb-7 border-b-2 border-white border-opacity-10">
+              {weather.name}
+            </h2>
             <p>
               {new Date(weather.dt * 1000).toLocaleDateString("en-US", {
                 day: "numeric",
