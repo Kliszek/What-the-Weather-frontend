@@ -81,7 +81,7 @@ export const WeatherBlock = () => {
 
   return (
     <div className="font-mono text-center text-white">
-      <h3 className="text-4xl text-black mb-5">Weather for today:</h3>
+      <h3 className="text-4xl text-slate-800 mb-5">Weather for today:</h3>
       {error && (
         <div className="bg-sky-600 p-5 py-10 text-2xl font-semibold text-white fade-in">
           {(error === "city not found" && (

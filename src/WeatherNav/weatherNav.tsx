@@ -12,6 +12,7 @@ export const WeatherNav = () => {
     const trimmedCityName = cityName.trim();
     setCityName(trimmedCityName);
     if (trimmedCityName) navigate(`/city/${trimmedCityName}`);
+    else navigate("/");
   };
 
   return (
@@ -31,9 +32,8 @@ export const WeatherNav = () => {
         <form onSubmit={handleSubmit} className="p-3 m-2 flex-1 text-right">
           <input
             id="city-search"
-            required
             placeholder="Search weather by city..."
-            type="text"
+            type="search"
             onChange={(e) => setCityName(e.target.value)}
             value={cityName}
             className="p-2 _rounded-l-lg"

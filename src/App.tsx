@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Error404 } from "./errors";
 import { WeatherBlock } from "./WeatherBlock";
 import { WeatherNav } from "./WeatherNav";
 
@@ -14,7 +15,7 @@ function App() {
               <Routes>
                 <Route path="" element={<WeatherBlock />} />
                 <Route path="city/:cityName/*" element={<WeatherBlock />} />
-                <Route path="*" element="404" />
+                <Route path="*" element={<Error404 />} />
               </Routes>
             </div>
           </div>
