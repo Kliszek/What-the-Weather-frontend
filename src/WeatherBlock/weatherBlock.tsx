@@ -56,7 +56,6 @@ export const WeatherBlock = () => {
     setIsPending(true);
     setError(null);
     setWeather(null);
-    console.log("asdasdga");
     WeatherService.getWeather(cityName, { signal: abortCont.signal })
       .then((result) => {
         setWeather(result.data);
