@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Error404 } from "./errors";
+import { Error404 } from "./Errors";
+import { Footer } from "./Footer";
 import { WeatherBlock } from "./WeatherBlock";
 import { WeatherNav } from "./WeatherNav";
 
@@ -20,6 +21,7 @@ function App() {
             </div>
           </div>
         </header>
+        <Footer />
       </div>
     </Router>
   );

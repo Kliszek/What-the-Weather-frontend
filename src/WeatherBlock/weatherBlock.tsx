@@ -125,9 +125,9 @@ export const WeatherBlock = () => {
         </div>
       )}
       {weather && (
-        <div className="bg-sky-600 p-6 _rounded-lg shadow-lg shadow-slate-600 grid grid-cols-3 gap-3 text-lg fade-in">
+        <div className="bg-sky-600 p-6 _rounded-lg shadow-lg shadow-slate-600 grid grid-cols-3 gap-3 text-lg cursor-default fade-in">
           <div className="col-span-1 text-left px-6 border-sky-700 border-r-2 border-opacity-30">
-            <h2 className="text-4xl font-semibold mb-7 border-b-2 border-white border-opacity-10">
+            <h2 className="text-4xl text-yellow-400 font-semibold mb-7 border-b-2 border-white border-opacity-10">
               {weather.name}
             </h2>
             <p>
@@ -160,30 +160,30 @@ export const WeatherBlock = () => {
                 alt=""
               />
             </div>
-            <p className="first-letter:uppercase text-2xl">
+            <p className="first-letter:uppercase text-2xl text-yellow-100">
               {weather.weather[0].description}
             </p>
           </div>
           <div className="col-span-1 text-left px-6 border-sky-700 border-l-2 border-opacity-30">
             <div className="ml-3 mt-6 text-xl space-y-3">
-              <p title="Sunrise">
+              <p title="Sunrise" className="hover:text-yellow-100">
                 <SunriseIcon className="inline mr-4" />
                 {getHourAndMinutes(weather.sys.sunrise)}
               </p>
-              <p title="Sunset">
+              <p title="Sunset" className="hover:text-yellow-100">
                 <SunsetIcon className="inline mr-4" />
                 {getHourAndMinutes(weather.sys.sunset)}
               </p>
-              <p title="Humidity">
+              <p title="Humidity" className="hover:text-yellow-100">
                 <HumidityIcon className="inline mr-4" />
                 {weather.main.humidity}%
               </p>
-              <p title="Wind">
+              <p title="Wind" className="hover:text-yellow-100">
                 <WindIcon className="inline mr-4" />
                 {weather.wind.speed.toFixed()} m/s,{" "}
                 {windDegToCompass(weather.wind.deg)}
               </p>
-              <p title="Pressure">
+              <p title="Pressure" className="hover:text-yellow-100">
                 <PressureIcon className="inline mr-4" />
                 {weather.main.pressure} hPa
               </p>
