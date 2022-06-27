@@ -9,6 +9,8 @@ import WeatherService from "../services/weather.service";
 import { WeatherResponse } from "../services/weather-response.interface";
 import "../animations/loading-spinner.css";
 import "../animations/fade-in.css";
+import { useParams } from "react-router-dom";
+import { AxiosError } from "axios";
 
 const ICON_URL = "http://openweathermap.org/img/wn/";
 
@@ -42,25 +44,41 @@ const windDegToCompass = (deg: number) => {
 };
 
 export const WeatherBlock = () => {
+  const { cityName } = useParams();
+
   const [weather, setWeather] = useState<null | WeatherResponse>(null);
   const [error, setError] = useState<null | string>(null);
   const [isPending, setIsPending] = useState<boolean>(true);
 
   useEffect(() => {
+    const abortCont = new AbortController();
+
+    setIsPending(true);
+    setError(null);
+    setWeather(null);
     console.log("asdasdga");
-    WeatherService.getWeather()
+    WeatherService.getWeather(cityName)
       .then((result) => {
         setWeather(result.data);
         setIsPending(false);
       })
-      .catch((error) => {
+      .catch((error: AxiosError) => {
         console.log(error);
+        setIsPending(false);
+        if (error.response?.status === 404) {
+          setError("Specified city was not found!");
+        } else {
+          setError(`Error: ${error.message}`);
+        }
       });
-  }, []);
+
+    return () => abortCont.abort();
+  }, [cityName]);
 
   return (
     <div className="font-mono text-center text-white">
       <h3 className="text-4xl text-black mb-5">Weather for today:</h3>
+      {error && <div className="text-black">{error}</div>}
       {isPending && (
         <div className="spinner mx-auto">
           <SunIcon />
