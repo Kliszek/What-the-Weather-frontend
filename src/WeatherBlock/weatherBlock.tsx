@@ -65,14 +65,15 @@ export const WeatherBlock = () => {
       })
       .catch((error: AxiosError) => {
         console.log(error);
-        if (error.message === "canceled") return;
+        if (error.message === "canceled" || error.message === "Request aborted")
+          return;
         setIsPending(false);
         if (error.response?.status === 404) {
           setError("city not found");
         } else if (error.response?.status === 429) {
           setError("too many requests");
         } else {
-          setError(`Error: ${error.response?.statusText || error.message}`);
+          setError(`${error.response?.statusText || error.message}`);
         }
       });
 
@@ -111,8 +112,20 @@ export const WeatherBlock = () => {
                 <br />
                 <p className="text-xl text-yellow-100">Slow down a little...</p>
               </div>
-            )) ||
-            "another error"}
+            )) || (
+              <div className="text-left px-7">
+                <h2 className="text-5xl text-yellow-400 mb-4 inline-block border-b-2 border-white border-opacity-10">
+                  Oops!
+                </h2>
+                <p className="text-3xl">
+                  Something bad happened with the server!
+                </p>
+                <br />
+                <p className="text-xl text-yellow-100">
+                  Error message: {error}
+                </p>
+              </div>
+            )}
         </div>
       )}
       {isPending && (
