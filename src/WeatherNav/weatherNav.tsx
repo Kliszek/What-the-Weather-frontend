@@ -17,7 +17,7 @@ export const WeatherNav = () => {
 
   return (
     <div className="text-gray-800 shadow-lg shadow-slate-300 z-10 */">
-      <nav className="w-full bg-sky-600 pb-2 md:pb-0 flex flex-col md:flex-row justify-between px-16">
+      <nav className="w-full bg-sky-600 pb-2 md:pb-0 flex flex-col md:flex-row justify-between md:px-16">
         <div className="xl:flex-1"></div>
         <Link
           to="/"
