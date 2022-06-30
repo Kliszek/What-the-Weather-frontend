@@ -2,11 +2,13 @@
 
 This application acts as a frontend for my [What the Weather?](https://github.com/Kliszek/What-the-Weather) application.
 
+It is deployed on _heroku.com_ at [this link](https://what-the-weather-1.herokuapp.com/).
+
 ## Description
 
 This application presents the user with a weather forecast for their area or for a specified city.
 
-## Instalation
+## Installation
 
 ```bash
 $ npm start
@@ -21,7 +23,7 @@ $ npm run start
 
 ## Configuration
 
-There are two important environmantal variables that need to be set:
+There are two important environmental variables that need to be set:
 
 | Name                  | Description                                       | Default value         |
 | --------------------- | ------------------------------------------------- | --------------------- |
