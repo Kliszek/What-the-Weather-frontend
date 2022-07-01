@@ -79,6 +79,18 @@ export const WeatherBlock = () => {
     return () => abortCont.abort();
   }, [cityName]);
 
+  const handleCityNameSize = () => {
+    const cityName = weather?.name;
+    const longestWord = Math.max(
+      ...cityName!.split(" ").map((key) => key.length),
+      7
+    );
+    return {
+      fontSize: `${17 / longestWord}rem`,
+      lineHeight: `${22 / longestWord}rem`,
+    };
+  };
+
   return (
     <div className="font-mono text-center text-white">
       <h3 className="text-3xl md:text-4xl text-slate-800 my-5">
@@ -141,7 +153,10 @@ export const WeatherBlock = () => {
       {weather && (
         <div className="bg-sky-600 p-6 _rounded-lg shadow-lg shadow-slate-600 grid sm:grid-cols-3 gap-3 text-lg cursor-default fade-in">
           <div className="col-span-1 text-left px-6 border-sky-700 border-r-2 border-opacity-30">
-            <h2 className="text-3xl sm:text-4xl text-yellow-400 font-semibold mb-7 border-b-2 border-white border-opacity-10">
+            <h2
+              className="text-yellow-400 font-semibold break-words leading-6 line mb-7 border-b-2 border-white border-opacity-10"
+              style={handleCityNameSize()}
+            >
               {weather.name}
             </h2>
             <p>
